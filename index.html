@@ -465,7 +465,7 @@
         </header>
         
         <div class="controls">
-            <div class="week-range" id="week-range">Semana del 12 al 18 de Junio, 2023</div>
+            <div class="week-range" id="week-range">Semana del 12 al 18 de Junio, 2025</div>
             <div>
                 <button class="btn" id="download-btn">
                     <i class="fas fa-download"></i> Descargar Semana
@@ -568,7 +568,7 @@
         </div>
         
         <footer>
-            <p>Planificador Semanal &copy; 2023 - Organiza tu tiempo eficientemente</p>
+            <p>Planificador Semanal &copy; 2025 - Organiza tu tiempo eficientemente</p>
         </footer>
     </div>
 
@@ -625,19 +625,17 @@
                 const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
                 habitTimeInput.value = timeString;
                 
-                // Establecer rango de fechas de la semana
+
                 setWeekDates();
-                
-                // Cargar hábitos
+
                 renderHabits();
-                
-                // Event listeners
+
                 addHabitForm.addEventListener('submit', addHabit);
                 downloadBtn.addEventListener('click', showDownloadModal);
                 downloadPng.addEventListener('click', downloadAsPNG);
                 downloadPdf.addEventListener('click', downloadAsPDF);
                 
-                // Cerrar modal al hacer clic fuera
+
                 downloadModal.addEventListener('click', function(e) {
                     if (e.target === downloadModal) {
                         downloadModal.style.display = 'none';
@@ -647,17 +645,16 @@
             
             function setWeekDates() {
                 const today = new Date();
-                const dayOfWeek = today.getDay(); // 0 (Domingo) a 6 (Sábado)
-                
-                // Calcular el lunes de esta semana
+                const dayOfWeek = today.getDay(); 
+
                 const monday = new Date(today);
                 monday.setDate(today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1));
                 
-                // Calcular el domingo de esta semana
+
                 const sunday = new Date(monday);
                 sunday.setDate(monday.getDate() + 6);
                 
-                // Formatear y mostrar las fechas
+      
                 weekRangeElement.textContent = `Semana del ${monday.getDate()} al ${sunday.getDate()} de ${months[sunday.getMonth()]}, ${sunday.getFullYear()}`;
             }
             
@@ -673,7 +670,6 @@
                     return;
                 }
                 
-                // Obtener días seleccionados
                 const selectedDays = [];
                 document.querySelectorAll('.days-selector input[type="checkbox"]:checked').forEach(checkbox => {
                     selectedDays.push(parseInt(checkbox.value));
@@ -684,7 +680,7 @@
                     return;
                 }
                 
-                // Crear nueva actividad
+
                 const newHabit = {
                     id: Date.now(),
                     name,
@@ -692,20 +688,17 @@
                     description,
                     days: selectedDays
                 };
-                
-                // Agregar a la lista
+
                 habits.push(newHabit);
                 
-                // Guardar en localStorage
+              
                 saveHabits();
                 
-                // Actualizar la vista
                 renderHabits();
                 
-                // Mostrar notificación
+
                 showNotification('Actividad agregada correctamente');
-                
-                // Resetear formulario
+
                 habitNameInput.value = '';
                 habitDescInput.value = '';
                 habitNameInput.focus();
@@ -725,28 +718,26 @@
             }
             
             function renderHabits() {
-                // Limpiar las columnas de días
+
                 document.querySelectorAll('.day-column').forEach(column => {
-                    // Mantener el mensaje de día vacío pero oculto
+   
                     const emptyMsg = column.querySelector('.empty-day');
                     if (emptyMsg) emptyMsg.style.display = 'block';
                     
-                    // Eliminar todos los hábitos excepto el mensaje vacío
+
                     const habitItems = column.querySelectorAll('.habit-item');
                     habitItems.forEach(item => item.remove());
                 });
                 
-                // Agregar hábitos a los días correspondientes
+
                 habits.forEach(habit => {
                     habit.days.forEach(day => {
                         const dayColumn = document.querySelector(`.day-column[data-day="${day}"]`);
                         
-                        // Ocultar mensaje de día vacío si existe
+
                         const emptyMsg = dayColumn.querySelector('.empty-day');
                         if (emptyMsg) emptyMsg.style.display = 'none';
-                        
-                        // Crear elemento de hábito
-                        const habitElement = document.createElement('div');
+                                                const habitElement = document.createElement('div');
                         habitElement.classList.add('habit-item');
                         habitElement.innerHTML = `
                             <div class="habit-time">
@@ -769,14 +760,13 @@
                 document.querySelectorAll('.day-column').forEach(column => {
                     const habits = Array.from(column.querySelectorAll('.habit-item'));
                     
-                    // Ordenar por hora
+
                     habits.sort((a, b) => {
                         const timeA = a.querySelector('.habit-time').textContent;
                         const timeB = b.querySelector('.habit-time').textContent;
                         return timeA.localeCompare(timeB);
                     });
                     
-                    // Eliminar todos los hábitos y agregarlos ordenados
                     habits.forEach(habit => habit.remove());
                     habits.forEach(habit => column.appendChild(habit));
                 });
@@ -811,7 +801,6 @@
             function downloadAsPNG() {
                 downloadModal.style.display = 'none';
                 
-                // Ocultar elementos que no deben aparecer en la imagen
                 const elementsToHide = document.querySelectorAll('.habit-actions, .habits-form, .controls');
                 elementsToHide.forEach(el => el.style.display = 'none');
                 
@@ -823,8 +812,7 @@
                     link.download = 'planificacion-semanal.png';
                     link.href = canvas.toDataURL('image/png');
                     link.click();
-                    
-                    // Restaurar elementos ocultos
+        
                     elementsToHide.forEach(el => el.style.display = '');
                 });
             }
@@ -832,12 +820,7 @@
             function downloadAsPDF() {
                 downloadModal.style.display = 'none';
                 showNotification('Función PDF en desarrollo. Usa la opción PNG por ahora.');
-                
-                // Para una implementación real de PDF, se necesitaría una librería como jsPDF
-                // Esta es una implementación simplificada
-            }
-            
-            // Hacer la función deleteHabit global para que funcione en los onclick
+        
             window.deleteHabit = deleteHabit;
         });
     </script>
