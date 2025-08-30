@@ -25,4 +25,4 @@ Puedes ver la aplicación funcionando en:
 
 1. Clona el repositorio:
 ```bash
-git clone https://github.com/marcos-piza118/planificador-semanal.git
+git clone https://github.com/Marcos-piza118/Planificador-Semanal.git
