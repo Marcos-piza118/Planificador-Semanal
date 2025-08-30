@@ -1,4 +1,4 @@
-# Planificador Semanal 📅
+# Planificador Semanal 
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -19,7 +19,7 @@ Una aplicación web elegante para planificar y organizar tus actividades semanal
 ##  Demo en vivo
 
 Puedes ver la aplicación funcionando en:  
-[https://marcos-piza118.github.io/planificador-semanal/](https://marcos-piza118.github.io/planificador-semanal/)
+[https://marcos-piza118.github.io/Planificador-Semanal/](https://marcos-piza118.github.io/Planificador-Semanal/)
 
 ## 🛠️ Instalación local
 
