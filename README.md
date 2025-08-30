@@ -7,16 +7,16 @@
 
 Una aplicación web elegante para planificar y organizar tus actividades semanales con un diseño moderno en tonos oscuros y violeta.
 
-## ✨ Características
+##  Características
 
-- 🎨 **Diseño elegante**: Interfaz oscura con acentos violetas
-- 📱 **Responsive**: Adaptado para desktop, tablet y móvil
-- 💾 **Almacenamiento local**: Tus actividades se guardan automáticamente
-- 📥 **Exportación**: Descarga tu planificación en PNG o PDF
-- 🌙 **Modo oscuro**: Diseño optimizado para uso nocturno
-- ⚡ **Rápido**: Aplicación ligera y de carga instantánea
+-  **Diseño elegante**: Interfaz oscura con acentos violetas
+-  **Responsive**: Adaptado para desktop, tablet y móvil
+-  **Almacenamiento local**: Tus actividades se guardan automáticamente
+-  **Exportación**: Descarga tu planificación en PNG o PDF
+-  **Modo oscuro**: Diseño optimizado para uso nocturno
+-  **Rápido**: Aplicación ligera y de carga instantánea
 
-## 🚀 Demo en vivo
+##  Demo en vivo
 
 Puedes ver la aplicación funcionando en:  
 [https://marcos-piza118.github.io/planificador-semanal/](https://marcos-piza118.github.io/planificador-semanal/)
