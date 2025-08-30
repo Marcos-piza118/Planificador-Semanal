@@ -6,43 +6,47 @@
     <title>Planificador Semanal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
+        :root {
+            --primary: #8a2be2; /* Violeta */
+            --primary-light: #9370db; /* Violeta medio */
+            --primary-dark: #6a0dad; /* Violeta oscuro */
+            --primary-transparent: rgba(138, 43, 226, 0.2);
+            --accent: #ba55d3; /* Violeta acento */
+            --text-primary: #e2d8f3;
+            --text-secondary: #c8b0f0;
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-card: #252525;
+            --bg-header: #1a1a1a;
+            --border-color: #333;
+            --success: #8a2be2;
+            --danger: #ff4d4d;
+            --border-radius: 12px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        :root {
-            --primary: #4361ee;
-            --primary-light: #e8f0fe;
-            --secondary: #6c757d;
-            --success: #28a745;
-            --danger: #dc3545;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray-100: #f8f9fa;
-            --gray-200: #e9ecef;
-            --gray-300: #dee2e6;
-            --gray-400: #ced4da;
-            --gray-500: #adb5bd;
-            --gray-600: #6c757d;
-            --gray-700: #495057;
-            --gray-800: #343a40;
-            --gray-900: #212529;
-            --border-radius: 12px;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
         body {
-            background-color: #f9fafb;
-            color: var(--gray-800);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
             padding: 20px;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(138, 43, 226, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(138, 43, 226, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 20%);
         }
         
         .container {
@@ -54,16 +58,42 @@
             text-align: center;
             margin-bottom: 40px;
             padding: 30px 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, #3a56d4 100%);
-            color: white;
+            background: var(--bg-header);
+            color: var(--text-primary);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        }
+        
+        .theme-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            box-shadow: 0 0 10px var(--primary-transparent);
+        }
+        
+        .theme-switch:hover {
+            background: var(--primary-transparent);
+            transform: rotate(30deg);
         }
         
         h1 {
             font-weight: 700;
             font-size: 2.5rem;
             margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
         }
         
         .subtitle {
@@ -71,6 +101,7 @@
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
+            color: var(--text-secondary);
         }
         
         .controls {
@@ -85,15 +116,16 @@
         .week-range {
             font-size: 1.2rem;
             font-weight: 500;
-            color: var(--gray-700);
-            background: white;
+            color: var(--text-primary);
+            background: var(--bg-card);
             padding: 12px 20px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
         }
         
         .btn {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -109,20 +141,21 @@
         }
         
         .btn:hover {
-            background: #3a56d4;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 0 15px var(--primary-transparent);
         }
         
         .btn-secondary {
-            background: white;
-            color: var(--gray-700);
-            border: 1px solid var(--gray-300);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--primary);
         }
         
         .btn-secondary:hover {
-            background: var(--gray-100);
+            background: var(--primary-transparent);
             transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--primary-transparent);
         }
         
         .app-container {
@@ -138,20 +171,21 @@
         }
         
         .habits-form {
-            background-color: white;
+            background-color: var(--bg-card);
             padding: 30px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
             height: fit-content;
             position: sticky;
             top: 30px;
+            border: 1px solid var(--border-color);
         }
         
         .form-title {
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 1px solid var(--gray-200);
-            color: var(--gray-800);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
             font-size: 1.4rem;
             font-weight: 600;
         }
@@ -164,17 +198,17 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: var(--gray-700);
+            color: var(--text-secondary);
             font-size: 0.95rem;
         }
         
         input, select, textarea {
             width: 100%;
             padding: 14px 16px;
-            background: white;
-            border: 1px solid var(--gray-300);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            color: var(--gray-800);
+            color: var(--text-primary);
             font-size: 1rem;
             transition: var(--transition);
         }
@@ -182,7 +216,7 @@
         input:focus, select:focus, textarea:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+            box-shadow: 0 0 0 3px var(--primary-transparent);
         }
         
         textarea {
@@ -200,9 +234,14 @@
         .day-checkbox {
             display: flex;
             align-items: center;
-            background: var(--gray-100);
+            background: var(--bg-secondary);
             padding: 12px;
             border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .day-checkbox:hover {
+            border-color: var(--primary);
         }
         
         .day-checkbox input {
@@ -213,15 +252,16 @@
         
         .day-checkbox label {
             margin-bottom: 0;
-            color: var(--gray-700);
+            color: var(--text-primary);
             font-weight: 400;
         }
         
         .calendar {
-            background-color: white;
+            background-color: var(--bg-card);
             padding: 30px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
         }
         
         .week-days {
@@ -234,17 +274,19 @@
         .day-header {
             text-align: center;
             padding: 15px 10px;
-            background: var(--gray-100);
-            color: var(--gray-700);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
             border-radius: var(--border-radius);
             font-weight: 500;
             font-size: 0.95rem;
+            border: 1px solid var(--border-color);
         }
         
         .today .day-header {
-            background: var(--primary-light);
-            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
             font-weight: 600;
+            box-shadow: 0 0 10px var(--primary-transparent);
         }
         
         .habits-list {
@@ -255,37 +297,41 @@
         
         .day-column {
             min-height: 500px;
-            background: var(--gray-100);
+            background: var(--bg-secondary);
             border-radius: var(--border-radius);
             padding: 15px;
             display: flex;
             flex-direction: column;
             gap: 12px;
+            border: 1px solid var(--border-color);
         }
         
         .today .day-column {
-            background: var(--primary-light);
-            border: 1px solid rgba(67, 97, 238, 0.2);
+            background: var(--primary-transparent);
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 15px var(--primary-transparent);
         }
         
         .habit-item {
-            background: white;
+            background: var(--bg-card);
             padding: 15px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
             border-left: 3px solid var(--primary);
             transition: var(--transition);
             position: relative;
+            border: 1px solid var(--border-color);
         }
         
         .habit-item:hover {
             box-shadow: var(--shadow-md);
             transform: translateY(-2px);
+            border-color: var(--primary);
         }
         
         .habit-time {
             font-size: 0.8rem;
-            color: var(--gray-600);
+            color: var(--accent);
             margin-bottom: 5px;
             display: flex;
             align-items: center;
@@ -295,12 +341,12 @@
         .habit-name {
             font-weight: 500;
             margin-bottom: 5px;
-            color: var(--gray-800);
+            color: var(--text-primary);
         }
         
         .habit-desc {
             font-size: 0.9rem;
-            color: var(--gray-600);
+            color: var(--text-secondary);
             margin-top: 8px;
         }
         
@@ -315,32 +361,34 @@
             padding: 6px 12px;
             font-size: 0.85rem;
             background: transparent;
-            color: var(--gray-600);
-            border: 1px solid var(--gray-300);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
         }
         
         .habit-actions button:hover {
-            background: var(--gray-100);
+            background: var(--primary-transparent);
             transform: none;
         }
         
         .btn-delete {
             color: var(--danger) !important;
-            border-color: rgba(220, 53, 69, 0.3) !important;
+            border-color: rgba(255, 77, 77, 0.3) !important;
         }
         
         .btn-delete:hover {
-            background: rgba(220, 53, 69, 0.05) !important;
+            background: rgba(255, 77, 77, 0.1) !important;
         }
         
         .empty-day {
             text-align: center;
-            color: var(--gray-500);
+            color: var(--text-secondary);
             padding: 30px 15px;
             font-style: italic;
-            background: white;
+            background: var(--bg-card);
             border-radius: var(--border-radius);
             margin-top: 0;
+            opacity: 0.7;
+            border: 1px dashed var(--border-color);
         }
         
         .notification {
@@ -348,8 +396,8 @@
             bottom: 20px;
             right: 20px;
             padding: 15px 20px;
-            background: white;
-            color: var(--gray-800);
+            background: var(--bg-card);
+            color: var(--text-primary);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-md);
             transform: translateY(100px);
@@ -358,7 +406,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            border-left: 4px solid var(--success);
+            border-left: 4px solid var(--primary);
+            border: 1px solid var(--border-color);
         }
         
         .notification.show {
@@ -373,8 +422,9 @@
             text-align: center;
             margin-top: 50px;
             padding: 20px;
-            color: var(--gray-600);
+            color: var(--text-secondary);
             font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
         }
         
         @media (max-width: 768px) {
@@ -404,26 +454,27 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
             align-items: center;
             justify-content: center;
         }
         
         .modal-content {
-            background: white;
+            background: var(--bg-card);
             padding: 30px;
             border-radius: var(--border-radius);
             max-width: 500px;
             width: 90%;
             box-shadow: var(--shadow-md);
+            border: 1px solid var(--primary);
         }
         
         .modal-title {
             margin-bottom: 20px;
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--gray-800);
+            color: var(--text-primary);
         }
         
         .modal-buttons {
@@ -433,9 +484,32 @@
             margin-top: 25px;
         }
         
+        /* Efectos de brillo y neón */
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        .glow-1 {
+            background: var(--primary);
+            top: 10%;
+            left: 10%;
+        }
+        
+        .glow-2 {
+            background: var(--accent);
+            bottom: 5%;
+            right: 15%;
+        }
+        
         /* Estilo para impresión */
         @media print {
-            .habits-form, .controls .btn, .habit-actions, footer {
+            .habits-form, .controls .btn, .habit-actions, footer, .theme-switch {
                 display: none !important;
             }
             
@@ -458,10 +532,16 @@
     </style>
 </head>
 <body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    
     <div class="container">
         <header>
+            <button class="theme-switch" id="theme-switch">
+                <i class="fas fa-moon"></i>
+            </button>
             <h1>Planificador Semanal</h1>
-            <p class="subtitle">Organiza tu semana y descarga tu planificación</p>
+            <p class="subtitle">Organiza tu semana con estilo</p>
         </header>
         
         <div class="controls">
@@ -568,7 +648,7 @@
         </div>
         
         <footer>
-            <p>Planificador Semanal &copy; 2025 - Organiza tu tiempo eficientemente</p>
+            <p>Planificador Semanal &copy; 2025 - kungfupalta </p>
         </footer>
     </div>
 
@@ -595,6 +675,9 @@
     </div>
 
     <script>
+        // Inicializar jsPDF
+        const { jsPDF } = window.jspdf;
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Referencias a elementos del DOM
             const addHabitForm = document.getElementById('add-habit-form');
@@ -608,6 +691,7 @@
             const downloadModal = document.getElementById('download-modal');
             const downloadPng = document.getElementById('download-png');
             const downloadPdf = document.getElementById('download-pdf');
+            const themeSwitch = document.getElementById('theme-switch');
             
             // Almacenamiento de actividades
             let habits = JSON.parse(localStorage.getItem('weekly_planner_habits')) || [];
@@ -625,17 +709,20 @@
                 const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
                 habitTimeInput.value = timeString;
                 
-
+                // Establecer rango de fechas de la semana
                 setWeekDates();
-
+                
+                // Cargar hábitos
                 renderHabits();
-
+                
+                // Event listeners
                 addHabitForm.addEventListener('submit', addHabit);
                 downloadBtn.addEventListener('click', showDownloadModal);
                 downloadPng.addEventListener('click', downloadAsPNG);
                 downloadPdf.addEventListener('click', downloadAsPDF);
+                themeSwitch.addEventListener('click', toggleTheme);
                 
-
+                // Cerrar modal al hacer clic fuera
                 downloadModal.addEventListener('click', function(e) {
                     if (e.target === downloadModal) {
                         downloadModal.style.display = 'none';
@@ -643,18 +730,33 @@
                 });
             }
             
+            function toggleTheme() {
+                // En este diseño solo tenemos modo oscuro con violeta
+                // Pero dejamos la funcionalidad por si queremos añadir más temas en el futuro
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+                
+                if (isDarkMode) {
+                    themeSwitch.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    themeSwitch.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            }
+            
             function setWeekDates() {
                 const today = new Date();
-                const dayOfWeek = today.getDay(); 
-
+                const dayOfWeek = today.getDay(); // 0 (Domingo) a 6 (Sábado)
+                
+                // Calcular el lunes de esta semana
                 const monday = new Date(today);
                 monday.setDate(today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1));
                 
-
+                // Calcular el domingo de esta semana
                 const sunday = new Date(monday);
                 sunday.setDate(monday.getDate() + 6);
                 
-      
+                // Formatear y mostrar las fechas
                 weekRangeElement.textContent = `Semana del ${monday.getDate()} al ${sunday.getDate()} de ${months[sunday.getMonth()]}, ${sunday.getFullYear()}`;
             }
             
@@ -670,6 +772,7 @@
                     return;
                 }
                 
+                // Obtener días seleccionados
                 const selectedDays = [];
                 document.querySelectorAll('.days-selector input[type="checkbox"]:checked').forEach(checkbox => {
                     selectedDays.push(parseInt(checkbox.value));
@@ -680,7 +783,7 @@
                     return;
                 }
                 
-
+                // Crear nueva actividad
                 const newHabit = {
                     id: Date.now(),
                     name,
@@ -688,17 +791,20 @@
                     description,
                     days: selectedDays
                 };
-
+                
+                // Agregar a la lista
                 habits.push(newHabit);
                 
-              
+                // Guardar en localStorage
                 saveHabits();
                 
+                // Actualizar la vista
                 renderHabits();
                 
-
+                // Mostrar notificación
                 showNotification('Actividad agregada correctamente');
-
+                
+                // Resetear formulario
                 habitNameInput.value = '';
                 habitDescInput.value = '';
                 habitNameInput.focus();
@@ -718,26 +824,28 @@
             }
             
             function renderHabits() {
-
+                // Limpiar las columnas de días
                 document.querySelectorAll('.day-column').forEach(column => {
-   
+                    // Mantener el mensaje de día vacío pero oculto
                     const emptyMsg = column.querySelector('.empty-day');
                     if (emptyMsg) emptyMsg.style.display = 'block';
                     
-
+                    // Eliminar todos los hábitos excepto el mensaje vacío
                     const habitItems = column.querySelectorAll('.habit-item');
                     habitItems.forEach(item => item.remove());
                 });
                 
-
+                // Agregar hábitos a los días correspondientes
                 habits.forEach(habit => {
                     habit.days.forEach(day => {
                         const dayColumn = document.querySelector(`.day-column[data-day="${day}"]`);
                         
-
+                        // Ocultar mensaje de día vacío si existe
                         const emptyMsg = dayColumn.querySelector('.empty-day');
                         if (emptyMsg) emptyMsg.style.display = 'none';
-                                                const habitElement = document.createElement('div');
+                        
+                        // Crear elemento de hábito
+                        const habitElement = document.createElement('div');
                         habitElement.classList.add('habit-item');
                         habitElement.innerHTML = `
                             <div class="habit-time">
@@ -760,13 +868,14 @@
                 document.querySelectorAll('.day-column').forEach(column => {
                     const habits = Array.from(column.querySelectorAll('.habit-item'));
                     
-
+                    // Ordenar por hora
                     habits.sort((a, b) => {
                         const timeA = a.querySelector('.habit-time').textContent;
                         const timeB = b.querySelector('.habit-time').textContent;
                         return timeA.localeCompare(timeB);
                     });
                     
+                    // Eliminar todos los hábitos y agregarlos ordenados
                     habits.forEach(habit => habit.remove());
                     habits.forEach(habit => column.appendChild(habit));
                 });
@@ -801,26 +910,64 @@
             function downloadAsPNG() {
                 downloadModal.style.display = 'none';
                 
-                const elementsToHide = document.querySelectorAll('.habit-actions, .habits-form, .controls');
+                // Ocultar elementos que no deben aparecer en la imagen
+                const elementsToHide = document.querySelectorAll('.habit-actions, .habits-form, .controls, .theme-switch');
                 elementsToHide.forEach(el => el.style.display = 'none');
                 
                 html2canvas(document.querySelector('.calendar'), {
                     scale: 2,
-                    backgroundColor: '#ffffff'
+                    backgroundColor: '#121212'
                 }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = 'planificacion-semanal.png';
                     link.href = canvas.toDataURL('image/png');
                     link.click();
-        
+                    
+                    // Restaurar elementos ocultos
                     elementsToHide.forEach(el => el.style.display = '');
                 });
             }
             
             function downloadAsPDF() {
                 downloadModal.style.display = 'none';
-                showNotification('Función PDF en desarrollo. Usa la opción PNG por ahora.');
-        
+                
+                // Ocultar elementos que no deben aparecer en el PDF
+                const elementsToHide = document.querySelectorAll('.habit-actions, .habits-form, .controls, .theme-switch');
+                elementsToHide.forEach(el => el.style.display = 'none');
+                
+                html2canvas(document.querySelector('.calendar'), {
+                    scale: 2,
+                    backgroundColor: '#121212'
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgWidth = 210; // A4 width in mm
+                    const pageHeight = 297; // A4 height in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    let heightLeft = imgHeight;
+                    let position = 0;
+                    
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                    
+                    // Add additional pages if needed
+                    while (heightLeft >= 0) {
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+                    
+                    pdf.save('planificacion-semanal.pdf');
+                    
+                    // Restaurar elementos ocultos
+                    elementsToHide.forEach(el => el.style.display = '');
+                    
+                    showNotification('PDF generado correctamente');
+                });
+            }
+            
+            // Hacer la función deleteHabit global para que funcione en los onclick
             window.deleteHabit = deleteHabit;
         });
     </script>
