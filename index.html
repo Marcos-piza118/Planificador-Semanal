@@ -3,153 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planificador Semanal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Desarrollo Personal - Herramientas</title>
+    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="glow-effect glow-1"></div>
-    <div class="glow-effect glow-2"></div>
-    
-    <div class="container">
-        <header>
-            <button class="theme-switch" id="theme-switch">
-                <i class="fas fa-sun"></i>
-            </button>
-            <h1>Planificador Semanal</h1>
-            <p class="subtitle">Organiza tu semana con estilo</p>
-        </header>
-        
-        <div class="controls">
-            <div class="week-range" id="week-range">Semana del 12 al 18 de Junio, 2025</div>
-            <div>
-                <button class="btn" id="download-btn">
-                    <i class="fas fa-download"></i> Descargar Semana
-                </button>
-            </div>
+    <header>
+        <div class="container">
+            <h1>Desarrollo Personal</h1>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#herramientas">Herramientas</a></li>
+                    <li><a href="#planificador">Planificador</a></li>
+                    <li><a href="#acerca">Acerca de</a></li>
+                </ul>
+            </nav>
         </div>
-        
-        <div class="app-container">
-            <div class="habits-form">
-                <h2 class="form-title">Nueva Actividad</h2>
-                <form id="add-habit-form">
-                    <div class="form-group">
-                        <label for="habit-name">Nombre de la actividad</label>
-                        <input type="text" id="habit-name" placeholder="Ej: Reunión, Gimnasio, Estudio..." required>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h2>Transforma tu vida con nuestras herramientas</h2>
+                <p>Descubre recursos prácticos para tu crecimiento personal y profesional</p>
+            </div>
+        </section>
+
+        <section id="herramientas" class="tools">
+            <div class="container">
+                <h2>Herramientas de Desarrollo Personal</h2>
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <h3>Meditación Guiada</h3>
+                        <p>Sesiones de mindfulness para reducir el estrés</p>
+                    </div>
+                    <div class="tool-card">
+                        <h3>Establecimiento de Metas</h3>
+                        <p>Define y haz seguimiento a tus objetivos</p>
+                    </div>
+                    <div class="tool-card">
+                        <h3>Diario de Gratitud</h3>
+                        <p>Registra las cosas por las que estás agradecido</p>
+                    </div>
+                    <div class="tool-card">
+                        <h3>Planificador Semanal</h3>
+                        <p>Organiza tu semana de manera efectiva</p>
+                        <a href="#planificador" class="btn">Usar Planificador</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="planificador" class="planner">
+            <div class="container">
+                <h2>Planificador Semanal</h2>
+                
+                <!-- Planificador integrado -->
+                <div class="glow-effect glow-1"></div>
+                <div class="glow-effect glow-2"></div>
+                
+                <div class="planificador-container">
+                    <div class="planificador-header">
+                        <button class="theme-switch" id="theme-switch">
+                            <i class="fas fa-sun"></i>
+                        </button>
+                        <h1>Planificador Semanal</h1>
+                        <p class="subtitle">Organiza tu semana con estilo</p>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="habit-time">Hora</label>
-                        <input type="time" id="habit-time" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="habit-desc">Descripción (opcional)</label>
-                        <textarea id="habit-desc" placeholder="Detalles de la actividad..."></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Días de la semana</label>
-                        <div class="days-selector">
-                            <div class="day-checkbox">
-                                <input type="checkbox" id="day-monday" value="1" checked>
-                                <label for="day-monday">Lunes</label>
-                            </div>
-                            <div class="day-checkbox">
-                                <input type="checkbox" id="day-tuesday" value="2" checked>
-                                <label for="day-tuesday">Martes</label>
-                            </div>
-                            <div class="day-checkbox">
-                                <input type="checkbox" id="day-wednesday" value="3" checked>
-                                <label for="day-wednesday">Miércoles</label>
-                            </div>
-                            <div class="day-checkbox">
-                                <input type="checkbox" id="day-thursday" value="4" checked>
-                                <label for="day-thursday">Jueves</label>
-                            </div>
-                            <div class="day-checkbox">
-                                <input type="checkbox" id="day-friday" value="5" checked>
-                                <label for="day-friday">Viernes</label>
-                            </div>
-                            <div class="day-checkbox">
-                                <input type="checkbox" id="day-saturday" value="6">
-                                <label for="day-saturday">Sábado</label>
-                            </div>
-                            <div class="day-checkbox">
-                                <input type="checkbox" id="day-sunday" value="0">
-                                <label for="day-sunday">Domingo</label>
-                            </div>
+                    <div class="controls">
+                        <div class="week-range" id="week-range">Semana del 12 al 18 de Junio, 2025</div>
+                        <div>
+                            <button class="btn" id="download-btn">
+                                <i class="fas fa-download"></i> Descargar Semana
+                            </button>
                         </div>
                     </div>
                     
-                    <button type="submit"><i class="fas fa-plus"></i> Agregar Actividad</button>
-                </form>
-            </div>
-            
-            <div class="calendar">
-                <div class="week-days">
-                    <div class="day-header">Lunes</div>
-                    <div class="day-header">Martes</div>
-                    <div class="day-header">Miércoles</div>
-                    <div class="day-header">Jueves</div>
-                    <div class="day-header">Viernes</div>
-                    <div class="day-header">Sábado</div>
-                    <div class="day-header today">Domingo</div>
+                    <div class="app-container">
+                        <div class="habits-form">
+                            <h2 class="form-title">Nueva Actividad</h2>
+                            <form id="add-habit-form">
+                                <div class="form-group">
+                                    <label for="habit-name">Nombre de la actividad</label>
+                                    <input type="text" id="habit-name" placeholder="Ej: Reunión, Gimnasio, Estudio..." required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="habit-time">Hora</label>
+                                    <input type="time" id="habit-time" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="habit-desc">Descripción (opcional)</label>
+                                    <textarea id="habit-desc" placeholder="Detalles de la actividad..."></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Días de la semana</label>
+                                    <div class="days-selector">
+                                        <div class="day-checkbox">
+                                            <input type="checkbox" id="day-monday" value="1" checked>
+                                            <label for="day-monday">Lunes</label>
+                                        </div>
+                                        <div class="day-checkbox">
+                                            <input type="checkbox" id="day-tuesday" value="2" checked>
+                                            <label for="day-tuesday">Martes</label>
+                                        </div>
+                                        <div class="day-checkbox">
+                                            <input type="checkbox" id="day-wednesday" value="3" checked>
+                                            <label for="day-wednesday">Miércoles</label>
+                                        </div>
+                                        <div class="day-checkbox">
+                                            <input type="checkbox" id="day-thursday" value="4" checked>
+                                            <label for="day-thursday">Jueves</label>
+                                        </div>
+                                        <div class="day-checkbox">
+                                            <input type="checkbox" id="day-friday" value="5" checked>
+                                            <label for="day-friday">Viernes</label>
+                                        </div>
+                                        <div class="day-checkbox">
+                                            <input type="checkbox" id="day-saturday" value="6">
+                                            <label for="day-saturday">Sábado</label>
+                                        </div>
+                                        <div class="day-checkbox">
+                                            <input type="checkbox" id="day-sunday" value="0">
+                                            <label for="day-sunday">Domingo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit"><i class="fas fa-plus"></i> Agregar Actividad</button>
+                            </form>
+                        </div>
+                        
+                        <div class="calendar">
+                            <div class="week-days">
+                                <div class="day-header">Lunes</div>
+                                <div class="day-header">Martes</div>
+                                <div class="day-header">Miércoles</div>
+                                <div class="day-header">Jueves</div>
+                                <div class="day-header">Viernes</div>
+                                <div class="day-header">Sábado</div>
+                                <div class="day-header today">Domingo</div>
+                            </div>
+                            
+                            <div class="habits-list" id="habits-list">
+                                <div class="day-column" data-day="1">
+                                    <div class="empty-day">No hay actividades</div>
+                                </div>
+                                <div class="day-column" data-day="2">
+                                    <div class="empty-day">No hay actividades</div>
+                                </div>
+                                <div class="day-column" data-day="3">
+                                    <div class="empty-day">No hay actividades</div>
+                                </div>
+                                <div class="day-column" data-day="4">
+                                    <div class="empty-day">No hay actividades</div>
+                                </div>
+                                <div class="day-column" data-day="5">
+                                    <div class="empty-day">No hay actividades</div>
+                                </div>
+                                <div class="day-column" data-day="6">
+                                    <div class="empty-day">No hay actividades</div>
+                                </div>
+                                <div class="day-column today" data-day="0">
+                                    <div class="empty-day">No hay actividades</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="notification" id="notification">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Actividad agregada correctamente</span>
+                </div>
+
+                <!-- Modal de descarga -->
+                <div class="modal" id="download-modal">
+                    <div class="modal-content">
+                        <h3 class="modal-title">Descargar planificación semanal</h3>
+                        <p>Selecciona el formato en el que deseas descargar tu planificación:</p>
+                        
+                        <div class="modal-buttons">
+                            <button class="btn btn-secondary" id="download-png">
+                                <i class="fas fa-image"></i> PNG
+                            </button>
+                            <button class="btn" id="download-pdf">
+                                <i class="fas fa-file-pdf"></i> PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin del planificador -->
                 
-                <div class="habits-list" id="habits-list">
-                    <div class="day-column" data-day="1">
-                        <div class="empty-day">No hay actividades</div>
-                    </div>
-                    <div class="day-column" data-day="2">
-                        <div class="empty-day">No hay actividades</div>
-                    </div>
-                    <div class="day-column" data-day="3">
-                        <div class="empty-day">No hay actividades</div>
-                    </div>
-                    <div class="day-column" data-day="4">
-                        <div class="empty-day">No hay actividades</div>
-                    </div>
-                    <div class="day-column" data-day="5">
-                        <div class="empty-day">No hay actividades</div>
-                    </div>
-                    <div class="day-column" data-day="6">
-                        <div class="empty-day">No hay actividades</div>
-                    </div>
-                    <div class="day-column today" data-day="0">
-                        <div class="empty-day">No hay actividades</div>
-                    </div>
-                </div>
             </div>
-        </div>
-        
-        <footer>
-            <p>Planificador Semanal &copy; 2025 - Kungfupalta</p>
-        </footer>
-    </div>
+        </section>
 
-    <div class="notification" id="notification">
-        <i class="fas fa-check-circle"></i>
-        <span>Actividad agregada correctamente</span>
-    </div>
-
-    <!-- Modal de descarga -->
-    <div class="modal" id="download-modal">
-        <div class="modal-content">
-            <h3 class="modal-title">Descargar planificación semanal</h3>
-            <p>Selecciona el formato en el que deseas descargar tu planificación:</p>
-            
-            <div class="modal-buttons">
-                <button class="btn btn-secondary" id="download-png">
-                    <i class="fas fa-image"></i> PNG
-                </button>
-                <button class="btn" id="download-pdf">
-                    <i class="fas fa-file-pdf"></i> PDF
-                </button>
+        <section id="acerca" class="about">
+            <div class="container">
+                <h2>Acerca de Nosotros</h2>
+                <p>Esta plataforma está diseñada para ayudarte en tu journey de desarrollo personal con herramientas prácticas y efectivas.</p>
             </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Kungfupalta. Todos los derechos reservados.</p>
         </div>
-    </div>
+    </footer>
 
     <!-- Scripts externos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -157,5 +223,6 @@
     
     <!-- Script principal -->
     <script src="assets/js/app.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
