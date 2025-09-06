@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desarrollo Personal - Herramientas</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    
     <header>
         <div class="container">
+            <button class="theme-switch" id="theme-switch">
+                <i class="fas fa-sun"></i>
+            </button>
             <h1>Desarrollo Personal</h1>
             <nav>
                 <ul>
@@ -60,19 +65,7 @@
             <div class="container">
                 <h2>Planificador Semanal</h2>
                 
-                <!-- Planificador integrado -->
-                <div class="glow-effect glow-1"></div>
-                <div class="glow-effect glow-2"></div>
-                
                 <div class="planificador-container">
-                    <div class="planificador-header">
-                        <button class="theme-switch" id="theme-switch">
-                            <i class="fas fa-sun"></i>
-                        </button>
-                        <h1>Planificador Semanal</h1>
-                        <p class="subtitle">Organiza tu semana con estilo</p>
-                    </div>
-                    
                     <div class="controls">
                         <div class="week-range" id="week-range">Semana del 12 al 18 de Junio, 2025</div>
                         <div>
@@ -198,7 +191,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Fin del planificador -->
                 
             </div>
         </section>
@@ -213,7 +205,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Kungfupalta. Todos los derechos reservados.</p>
+            <p>Desarrollo Personal &copy; 2023 - Kungfupalta</p>
         </div>
     </footer>
 
@@ -222,7 +214,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <!-- Script principal -->
-    <script src="assets/js/app.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/planificador.js"></script>
 </body>
 </html>

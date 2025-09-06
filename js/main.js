@@ -14,5 +14,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // El planificador ya está integrado en el HTML con su propio JS
+    // Cargar el tema guardado
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const themeSwitch = document.getElementById('theme-switch');
+    
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        themeSwitch.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+        document.body.classList.add('dark-mode');
+        themeSwitch.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    // Cambiar tema
+    themeSwitch.addEventListener('click', function() {
+        const body = document.body;
+        const isLightMode = body.classList.contains('light-mode');
+        
+        if (isLightMode) {
+            // Cambiar a modo oscuro
+            body.classList.remove('light-mode');
+            themeSwitch.innerHTML = '<i class="fas fa-sun"></i>';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            // Cambiar a modo claro
+            body.classList.add('light-mode');
+            themeSwitch.innerHTML = '<i class="fas fa-moon"></i>';
+            localStorage.setItem('theme', 'light');
+        }
+    });
 });
